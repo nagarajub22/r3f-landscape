@@ -5,7 +5,7 @@
   --bg-dark-color: #172233;
   --bg-color-blend: #0D1015;
   --text-primary-color: #fafafa;
-  --text-accent-color: #FF405E;
+  --text-accent-color: #ff5858;
   --text-light-color: rgba(255, 255, 255, 0.15);
 
 
@@ -28,9 +28,16 @@ body {
   background-color: var(--bg-color-blend);
 }
 
+
+
 #root {
   width: 100vw;
   height: 100vh;
+}
+
+#root div:first-child div {
+  mix-blend-mode: overlay;
+  opacity: 1.0;
 }
 
 #site-overlay {
@@ -39,27 +46,12 @@ body {
   left: 0px;
   width: 100%;
   height: 100%;
+  opacity: 0.3;
   z-index: 2;
-  opacity: 0.3499999940395355;
   background: var(--bg-dark-color);
 }
 
 #site-main {
   position: relative;
   z-index: 3;
-}
-
-/* 
-  This style will be void, when 3d animation is in place 
-  Right now the assumed animation picture is placed here
-*/
-#site-bg-anim {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background: url('/src/assets/background_steps.png') no-repeat;
-  background-size: cover;
-  background-blend-mode: luminosity;
-  mix-blend-mode: luminosity;
-  z-index: 1;
 }
