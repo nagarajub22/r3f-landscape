@@ -1,10 +1,10 @@
 import { Grid } from "@react-three/drei";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { BrightnessContrast, ColorAverage, EffectComposer, Sepia } from "@react-three/postprocessing";
-import { BlendFunction } from 'postprocessing';
 import { useRef } from "react";
 import { ShaderMaterial } from "three";
-import { fragmentShader, vertexShader } from "./common/BackgroundShaderMaterial";
+
+import fragmentShader from "../shaders/bg_frag_shader.glsl";
+import vertexShader from "../shaders/bg_vert_shader.glsl";
 
 export function BackgroundContent() {
 

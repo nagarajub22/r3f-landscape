@@ -1,5 +1,5 @@
 import './NavBar.css';
-import { AppPageList, NavBarAction } from "../../config/common";
+import { AppPageList, NavBarAction } from "../config/common";
 
 function NavBar({ activePage, changePage }: NavBarAction) {
 

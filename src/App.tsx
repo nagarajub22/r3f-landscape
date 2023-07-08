@@ -4,7 +4,7 @@ import './assets/background_steps.png';
 import { AppPageList } from './config/common';
 import { BackgroundContent } from './pages/Background';
 import { PageContent } from './pages/Content';
-import NavBar from './pages/common/NavBar';
+import NavBar from './common/NavBar';
 
 function App() {
 
