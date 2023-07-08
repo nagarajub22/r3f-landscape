@@ -2,6 +2,8 @@
 export const vertexShader = /*glsl*/`
 
     varying float vDisplacement;
+    varying vec3 vPosition;
+    varying vec2 vUv;
 
     uniform float u_time;
 
@@ -119,15 +121,18 @@ export const vertexShader = /*glsl*/`
     }
 
     void main() {
-        float density = 1.0;
+        float density = 1.05;
         float roughness = 1.0;
-        float factor = snoise(position * density + u_time) * roughness;
-        factor = mapRangeLinear(factor, -0.5, 0.4, 0.0, 1.0, 8.0);
-
         
-        vDisplacement = position.z + normal.z * factor;
+        vUv = uv;
+        vPosition = position;
+
+        float factor = snoise(position * density + u_time) * roughness;
+        factor = mapRangeLinear(factor, -0.5, 0.8, 0.0, 1.0, 8.0);
+        
+        vDisplacement = factor;
         vec3 newPosition = position;
-        newPosition.z = clamp(vDisplacement, 0.0, 0.2);
+        newPosition.z = clamp(position.z + normal.z * vDisplacement, 0.0, 0.15);
         
         gl_Position = projectionMatrix * modelViewMatrix * vec4(newPosition, 1.0);
 
@@ -135,21 +140,30 @@ export const vertexShader = /*glsl*/`
 `;
 export const fragmentShader = /*glsl*/`
     uniform vec2 u_resolution;
+    uniform sampler2D albedo;
 
     varying float vDisplacement;
+    varying vec2 vUv;
+    varying vec3 vPosition;
+
+    float rand(float x){
+        return fract(sin(x)*1.0);
+    }
 
     vec3 colorRampLinear(float t, vec3 startColor, vec3 endColor) {
         return mix(startColor, endColor, t);
     }
 
     void main() {
-        // vec3 startColor = vec3(0.638,1.000,0.212);
-        // vec3 endColor = vec3(1.000,0.029,0.002);
+
+        vec2 pixelCoord = gl_FragCoord.xy/u_resolution;
+        
+        float distance = distance(pixelCoord, vec2(vDisplacement));
 
         vec3 startColor = vec3(0.1);
         vec3 endColor = vec3(0.85, 0.75, 1.0);
-        
-        vec3 interpolatedColor = colorRampLinear(vDisplacement, startColor, endColor);
-        gl_FragColor = vec4(vec3(interpolatedColor), 1.0);
+        vec3 interpolatedColor = colorRampLinear(distance, startColor, endColor);
+
+        gl_FragColor = vec4(interpolatedColor, 1.0);
     }
 `;

@@ -1,7 +1,7 @@
-import { Grid, OrbitControls } from "@react-three/drei";
+import { Grid } from "@react-three/drei";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { EffectComposer, Outline, Sepia } from "@react-three/postprocessing";
-import { BlendFunction, KernelSize, Resolution } from 'postprocessing';
+import { BrightnessContrast, ColorAverage, EffectComposer, Sepia } from "@react-three/postprocessing";
+import { BlendFunction } from 'postprocessing';
 import { useRef } from "react";
 import { ShaderMaterial } from "three";
 import { fragmentShader, vertexShader } from "./common/BackgroundShaderMaterial";
@@ -26,12 +26,6 @@ export function Anim() {
     return (
         <>
             <Scene meshRef={meshRef} />
-            <EffectComposer>
-                <Sepia 
-                    intensity={1.0} // sepia intensity
-                    blendFunction={BlendFunction.HUE} 
-                />
-            </EffectComposer> 
         </>
     )
 }

@@ -12,7 +12,7 @@
   --text-size-site-default: 14px;
   --text-size-site-headline: 6rem;
   --text-size-site-subheadline: 3rem;
-  --text-size-site-nav: 1.2rem;
+  --text-size-site-nav: 1rem;
 }
 
 /* Application css */
@@ -37,7 +37,7 @@ body {
 
 #root div:first-child div {
   mix-blend-mode: overlay;
-  opacity: 1.0;
+  opacity: 0.8;
 }
 
 #site-overlay {
@@ -46,9 +46,7 @@ body {
   left: 0px;
   width: 100%;
   height: 100%;
-  opacity: 0.3;
-  z-index: 2;
-  background: var(--bg-dark-color);
+  z-index: 1;
 }
 
 #site-main {

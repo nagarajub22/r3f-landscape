@@ -12,7 +12,6 @@ function App() {
 
   return (
     <>
-      {/* <div id="site-bg-anim"></div> */}
       <BackgroundContent/>
       <div id="site-overlay"></div>
       <div id="site-main">
